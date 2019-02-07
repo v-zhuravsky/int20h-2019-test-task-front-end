@@ -2,7 +2,7 @@ import { IEmotionsService } from '../abstract/IEmotionsService';
 import { endpoint } from '../apiEndpoint';
 import { Emotions } from '../models/Emotions';
 
-class EmotionsService implements IEmotionsService {
+export class EmotionsService implements IEmotionsService {
   public getEmotions(): Promise<Emotions> {
     return new Promise((resolve, reject) => {
       fetch(endpoint)
