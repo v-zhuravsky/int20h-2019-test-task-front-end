@@ -1,9 +1,18 @@
-import { UniqueId } from "./UniqueId";
-
 export interface Photo {
   url: string;
-  emotionId: UniqueId;
-  photoId: UniqueId;
+  emotions: Emotions;
 }
+
+interface Emotion {
+  sadness: number;
+  neutral: number;
+  disgust: number;
+  anger: number;
+  surprise: number;
+  fear: number;
+  happiness: number;
+}
+
+type Emotions = Emotion[];
 
 export type Photos = Photo[];

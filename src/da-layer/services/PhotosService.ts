@@ -7,7 +7,9 @@ export class PhotosService implements IPhotosService {
     return new Promise((resolve, reject) => {
       fetch(endpoint)
         .then(res => {
-          resolve((res as unknown) as Photos);
+          res.json().then(data => {
+            resolve(data as Photos);
+          });
         })
         .catch(error => reject(error));
     });
