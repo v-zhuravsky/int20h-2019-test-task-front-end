@@ -7,3 +7,15 @@ body {
   margin: auto;
   margin-top: 70px;
 }
+
+.photo__emotions{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 3px 10px
+}
+
+.emotion{
+  width: 20px;
+  height: 20px;
+}

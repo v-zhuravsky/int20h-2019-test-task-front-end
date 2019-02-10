@@ -13,6 +13,6 @@ interface Emotion {
   happiness: number;
 }
 
-type Emotions = Emotion[];
+export type Emotions = Emotion[];
 
 export type Photos = Photo[];

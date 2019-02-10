@@ -21,18 +21,27 @@ const emotions = [
 // TODO: move it to somewhere else
 const getBigImage = (photo: Photo): string => photo.url;
 const filterPhotos = (filter: string): PhotosType => [];
-const getMockPhotos = (): PhotosType => [{
-  url: 'https://www.w3schools.com/w3css/img_lights.jpg',
-  emotions: []
-}]
+const getMockPhotos = (): PhotosType => [
+  {
+    url: 'https://www.w3schools.com/w3css/img_lights.jpg',
+    emotions: [
+      {
+        sadness: 95,
+        neutral: 1,
+        disgust: 2,
+        anger: 2,
+        surprise: 0,
+        fear: 0,
+        happiness: 0,
+      },
+    ],
+  },
+];
 
 const App: React.FC = () => {
   const [items, setItems] = useState(getMockPhotos());
   const [filter, setFilter] = useState('');
   const [dialogImage, setDialogImage] = useState('');
-  console.log('itesm: ', items);
-  console.log('filter: ', filter);
-  console.log('dialogImage: ', dialogImage);
   return (
     <>
       <TopBar title="Photos" />
