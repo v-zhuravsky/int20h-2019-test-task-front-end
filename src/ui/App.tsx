@@ -21,16 +21,18 @@ const emotions = [
 // TODO: move it to somewhere else
 const getBigImage = (photo: Photo): string => photo.url;
 const filterPhotos = (filter: string): PhotosType => [];
+const getMockPhotos = (): PhotosType => [{
+  url: 'https://www.w3schools.com/w3css/img_lights.jpg',
+  emotions: []
+}]
 
 const App: React.FC = () => {
-  const [items, setItems] = useState([] as PhotosType);
+  const [items, setItems] = useState(getMockPhotos());
   const [filter, setFilter] = useState('');
   const [dialogImage, setDialogImage] = useState('');
-  useEffect(() => {
-    fetch('https://faces.vova-lantsov.com/api/images')
-      .then(r => r.json())
-      .then(data => setItems(data));
-  });
+  console.log('itesm: ', items);
+  console.log('filter: ', filter);
+  console.log('dialogImage: ', dialogImage);
   return (
     <>
       <TopBar title="Photos" />

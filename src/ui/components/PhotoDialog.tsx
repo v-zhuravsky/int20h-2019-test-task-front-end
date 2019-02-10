@@ -6,9 +6,7 @@ import {
 
 const PhotoDialog: React.FC<{url: string, onClose: Function}> = ({url, onClose}) => (
   <Dialog open={url !== ''} onClose={() => onClose()}>
-    <DialogContent>
-      <img src={url} />
-    </DialogContent>
+    <img src={url} />
   </Dialog>
 );
 
