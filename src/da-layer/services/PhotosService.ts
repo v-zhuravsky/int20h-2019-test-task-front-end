@@ -10,7 +10,7 @@ export class PhotosService implements IPhotosService {
   ): Promise<Photos> {
     return new Promise((resolve, reject) => {
       fetch(
-        endpoint + `/photos?offset=${offset}&count=${count}&emotion=${emotion}`
+        endpoint + `?offset=${offset}&count=${count}&emotion=${emotion}`
       )
         .then(res => {
           res.json().then(data => {
