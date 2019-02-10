@@ -28,13 +28,8 @@ const App: React.FC = () => {
   const [filter, setFilter] = useState('');
   const [dialogImage, setDialogImage] = useState('');
   useEffect(() => {
-    console.log('using effect')
-    photosService.getPhotos(1).then(photos => setItems(photos));
+    photosService.getPhotos(1).then((photos: PhotosType) => setItems(photos));
   }, []);
-  console.log('items: ', items);
-  console.log('filter: ', filter);
-  console.log('dialogImage: ', dialogImage);
-  console.log('______________________-');
   return (
     <>
       <TopBar title="Photos" />
