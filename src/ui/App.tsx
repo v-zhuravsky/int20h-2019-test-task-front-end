@@ -34,6 +34,15 @@ const getMockPhotos = (): PhotosType => [
         fear: 0,
         happiness: 0,
       },
+      {
+        sadness: 95,
+        neutral: 1,
+        disgust: 2,
+        anger: 2,
+        surprise: 0,
+        fear: 0,
+        happiness: 0,
+      },
     ],
   },
 ];

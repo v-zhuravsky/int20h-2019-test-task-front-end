@@ -12,10 +12,14 @@ body {
   position: absolute;
   bottom: 0;
   right: 0;
-  padding: 3px 10px
+  padding: 3px 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 4px;
+  height: 26px;
 }
 
 .emotion{
   width: 20px;
   height: 20px;
+  margin: 3px;
 }
