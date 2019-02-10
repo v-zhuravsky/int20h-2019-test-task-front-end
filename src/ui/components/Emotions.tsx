@@ -32,7 +32,10 @@ const findMaxEmotion = (emotion: Record<string, number>): string => {
   let maxValue = 0;
   let savedKey = '';
   Object.keys(emotion).forEach(key => {
-    if (maxValue < emotion[key]) savedKey = key;
+    if (maxValue < emotion[key]) {
+      savedKey = key;
+      maxValue = emotion[key]
+    }
   });
   return savedKey;
 };
@@ -40,6 +43,9 @@ const findMaxEmotion = (emotion: Record<string, number>): string => {
 const Emotions: React.FC<{ className: string; emotions: EmotionsType }> = ({
   className,
   emotions,
-}) => <div className={className}>{pickEmotions(emotions)}</div>;
+}) => {
+  const elements = pickEmotions(emotions);
+  return elements.length ? <div className={className}>{elements}</div> : <div/>
+};
 
 export default Emotions;
