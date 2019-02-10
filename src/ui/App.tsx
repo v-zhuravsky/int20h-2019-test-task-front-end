@@ -4,7 +4,7 @@ import TopBar from './components/TopBar';
 import Filter from './components/Filter';
 import Photos from './components/Photos';
 import PhotoDialog from './components/PhotoDialog';
-import { Photos as PhotosType } from '../da-layer/models/Photos';
+import { Photo, Photos as PhotosType } from '../da-layer/models/Photos';
 
 import './app.css';
 
@@ -17,6 +17,10 @@ const emotions = [
   'fear',
   'happiness',
 ];
+
+// TODO: move it to somewhere else
+const getBigImage = (photo: Photo): string => photo.url;
+const filterPhotos = (filter: string): PhotosType => [];
 
 const App: React.FC = () => {
   const [items, setItems] = useState([] as PhotosType);
@@ -31,8 +35,18 @@ const App: React.FC = () => {
     <>
       <TopBar title="Photos" />
       <div className="content">
-        <Filter values={emotions} onChange={setFilter} value={filter} />
-        <Photos items={items} onClick={setDialogImage} />
+        <Filter
+          values={emotions}
+          onChange={(val: string) => {
+            setFilter(val);
+            setItems(filterPhotos(val));
+          }}
+          value={filter}
+        />
+        <Photos
+          items={items}
+          onClick={(item: Photo) => setDialogImage(getBigImage(item))}
+        />
       </div>
       <PhotoDialog url={dialogImage} onClose={() => setDialogImage('')} />
     </>
