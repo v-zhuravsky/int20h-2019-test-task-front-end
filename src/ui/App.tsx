@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
-import TopBar from './TopBar';
-import Filter from './Filter';
-import Photos from './Photos';
-import PhotoDialog from './PhotoDialog';
+import TopBar from './components/TopBar';
+import Filter from './components/Filter';
+import Photos from './components/Photos';
+import PhotoDialog from './components/PhotoDialog';
 import { Photos as PhotosType } from '../da-layer/models/Photos';
 
 import './app.css';
@@ -18,8 +18,8 @@ const emotions = [
   'happiness',
 ];
 
-const App: React.FC<{ photos: PhotosType }> = ({ photos = [] }) => {
-  const [items, setItems] = useState(photos);
+const App: React.FC = () => {
+  const [items, setItems] = useState([] as PhotosType);
   const [filter, setFilter] = useState('');
   const [dialogImage, setDialogImage] = useState('');
   useEffect(() => {
@@ -27,7 +27,6 @@ const App: React.FC<{ photos: PhotosType }> = ({ photos = [] }) => {
       .then(r => r.json())
       .then(data => setItems(data));
   });
-  console.log(items)
   return (
     <>
       <TopBar title="Photos" />

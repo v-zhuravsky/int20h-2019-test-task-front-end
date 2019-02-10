@@ -3,7 +3,7 @@ import {
   GridListTile,
   GridList,
 } from '@material-ui/core';
-import { Photos as PhotosType } from '../da-layer/models/Photos';
+import { Photos as PhotosType } from '../../da-layer/models/Photos';
 
 const Photos: React.FC<{items: PhotosType, onClick: Function}> = ({items, onClick}) => (
   <GridList cellHeight={150} cols={3}>
