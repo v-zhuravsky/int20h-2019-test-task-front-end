@@ -6,7 +6,7 @@ export interface IPhotosService {
    *
    * @param offset - previous count amount to let server know what set of photos to load
    * @param count - count of photos to load
-   * @param emotion - filter of emotion to load photo with
+   * @param emotion - optional filter of emotion to load photo with
    */
-  getPhotos(offset: number, count: number, emotion: string): Promise<Photos>;
+  getPhotos(offset: number, count: number, emotion?: string): Promise<Photos>;
 }

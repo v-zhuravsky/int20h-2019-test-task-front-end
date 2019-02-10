@@ -6,11 +6,12 @@ export class PhotosService implements IPhotosService {
   public getPhotos(
     offset: number,
     count: number,
-    emotion: string
+    emotion?: string
   ): Promise<Photos> {
     return new Promise((resolve, reject) => {
       fetch(
-        endpoint + `?offset=${offset}&count=${count}&emotion=${emotion}`
+        endpoint +
+          `?offset=${offset}&count=${count}&emotion=${emotion ? emotion : ''}`
       )
         .then(res => {
           res.json().then(data => {
