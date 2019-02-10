@@ -1,14 +1,18 @@
 import { IPhotosService } from '../abstract/IPhotoService';
 import { Photos } from '../../da-layer/models/Photos';
 import { getApi } from '../../da-layer/getApi';
+import { IApiProvider } from '../../da-layer/abstract/IApiProvider';
 
-const itemsOnPage = 300;
 
 export class PhotosService implements IPhotosService {
-  api = getApi();
+
+  private api: IApiProvider; 
+  constructor(private perPage: number){
+    this.api = getApi();
+  }
 
   public getPhotos(page: number, emotion?: string): Promise<Photos> {
-    return this.api.photos.getPhotos(itemsOnPage * (page - 1), itemsOnPage, emotion);
+    return this.api.photos.getPhotos(this.perPage * (page - 1), this.perPage, emotion);
   }
 
   public getPhotoUrl(url: string): string {
