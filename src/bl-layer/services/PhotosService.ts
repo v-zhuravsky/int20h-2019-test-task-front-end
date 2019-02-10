@@ -8,7 +8,7 @@ export class PhotosService implements IPhotosService {
   api = getApi();
 
   public getPhotos(page: number, emotion?: string): Promise<Photos> {
-    return this.api.photos.getPhotos(itemsOnPage, page * itemsOnPage, emotion);
+    return this.api.photos.getPhotos(itemsOnPage * (page - 1), itemsOnPage, emotion);
   }
 
   public getPhotoUrl(url: string): string {
