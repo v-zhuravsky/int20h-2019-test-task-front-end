@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import {
-  Typography,
-  GridListTile,
-  GridList,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Dialog,
-  DialogContent,
-} from '@material-ui/core';
+
+import TopBar from './TopBar';
+import Filter from './Filter';
+import Photos from './Photos';
+import PhotoDialog from './PhotoDialog';
+import { Photos as PhotosType } from '../da-layer/models/Photos';
+
 import './app.css';
 
 const emotions = [
@@ -23,7 +17,8 @@ const emotions = [
   'fear',
   'happiness',
 ];
-const App: React.FC<{ photos: object[] }> = ({ photos = [] }) => {
+
+const App: React.FC<{ photos: PhotosType }> = ({ photos = [] }) => {
   const [items, setItems] = useState(photos);
   const [filter, setFilter] = useState('');
   const [dialogImage, setDialogImage] = useState('');
@@ -32,51 +27,15 @@ const App: React.FC<{ photos: object[] }> = ({ photos = [] }) => {
       .then(r => r.json())
       .then(data => setItems(data));
   });
+  console.log(items)
   return (
     <>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            Photos
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <TopBar title="Photos" />
       <div className="content">
-        <FormControl fullWidth={true}>
-          <InputLabel htmlFor="filter">Filter</InputLabel>
-          <Select
-            value={filter}
-            onChange={e => setFilter(e.target.value)}
-            variant="filled"
-            inputProps={{
-              name: 'filter',
-              id: 'filter',
-              fullWidth: true
-            }}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            {emotions.map(e => (
-              <MenuItem value={e}>{e}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <GridList cellHeight={150} cols={3}>
-          {items.map((item, index) => (
-            //@ts-ignore
-            <GridListTile key={index} onClick={() => setDialogImage(item.url)}>
-              //@ts-ignore
-              <img src={item.url} />
-            </GridListTile>
-          ))}
-        </GridList>
+        <Filter values={emotions} onChange={setFilter} value={filter} />
+        <Photos items={items} onClick={setDialogImage} />
       </div>
-      <Dialog open={dialogImage !== ''} onClose={() => setDialogImage('')}>
-        <DialogContent>
-          <img src={dialogImage}/>
-        </DialogContent>
-      </Dialog>
+      <PhotoDialog url={dialogImage} onClose={() => setDialogImage('')} />
     </>
   );
 };
