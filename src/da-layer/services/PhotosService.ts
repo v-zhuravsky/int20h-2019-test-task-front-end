@@ -6,12 +6,17 @@ export class PhotosService implements IPhotosService {
   public getPhotos(
     offset: number,
     count: number,
-    emotion?: string
+    emotion?: string,
+    emotionValue?: number,
+    emotionComparison?: string
   ): Promise<Photos> {
     return new Promise((resolve, reject) => {
+      const emotionQuery = emotion
+        ? `${emotion}=${emotionValue}&${emotion}_comparison=${emotionComparison}`
+        : '';
       fetch(
         endpoint +
-          `?offset=${offset}&count=${count}&emotion=${emotion ? emotion : ''}`
+          `?offset=${offset}&count=${count}${emotionQuery ? `&${emotionQuery}` : ''}`
       )
         .then(res => {
           res.json().then(data => {

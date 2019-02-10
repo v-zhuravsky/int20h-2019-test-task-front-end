@@ -13,7 +13,9 @@ export class PhotosService implements IPhotosService {
     return this.api.photos.getPhotos(
       this.perPage * (page - 1),
       this.perPage,
-      emotion
+      emotion,
+      50,
+      'gt'
     );
   }
 
