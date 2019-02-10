@@ -5,6 +5,7 @@ import Filter from './components/Filter';
 import Photos from './components/Photos';
 import PhotoDialog from './components/PhotoDialog';
 import { Photo, Photos as PhotosType } from '../da-layer/models/Photos';
+import { PhotosService } from '../bl-layer/services/PhotosService';
 
 import './app.css';
 
@@ -18,39 +19,17 @@ const emotions = [
   'happiness',
 ];
 
-// TODO: move it to somewhere else
-const getBigImage = (photo: Photo): string => photo.url;
-const filterPhotos = (filter: string): PhotosType => [];
-const getMockPhotos = (): PhotosType => [
-  {
-    url: 'https://www.w3schools.com/w3css/img_lights.jpg',
-    emotions: [
-      {
-        sadness: 95,
-        neutral: 1,
-        disgust: 2,
-        anger: 2,
-        surprise: 0,
-        fear: 0,
-        happiness: 0,
-      },
-      {
-        sadness: 95,
-        neutral: 1,
-        disgust: 2,
-        anger: 2,
-        surprise: 0,
-        fear: 0,
-        happiness: 0,
-      },
-    ],
-  },
-];
+const photosService = new PhotosService(300);
+const filterPhotos = (filter: string): Promise<PhotosType> =>
+  photosService.getPhotos(1, filter);
 
 const App: React.FC = () => {
-  const [items, setItems] = useState(getMockPhotos());
+  const [items, setItems] = useState([] as PhotosType);
   const [filter, setFilter] = useState('');
   const [dialogImage, setDialogImage] = useState('');
+  useEffect(() => {
+    photosService.getPhotos(1).then((photos: PhotosType) => setItems(photos));
+  }, []);
   return (
     <>
       <TopBar title="Photos" />
@@ -59,13 +38,15 @@ const App: React.FC = () => {
           values={emotions}
           onChange={(val: string) => {
             setFilter(val);
-            setItems(filterPhotos(val));
+            filterPhotos(val).then(photos => setItems(photos));
           }}
           value={filter}
         />
         <Photos
           items={items}
-          onClick={(item: Photo) => setDialogImage(getBigImage(item))}
+          onClick={(item: Photo) =>
+            setDialogImage(photosService.getPhotoUrl(item.url))
+          }
         />
       </div>
       <PhotoDialog url={dialogImage} onClose={() => setDialogImage('')} />
