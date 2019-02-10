@@ -20,8 +20,12 @@ const icons: Record<string, string> = {
 };
 
 const pickEmotions = (emotions: EmotionsType) =>
-  emotions.map(emotion => (
-    <img className="emotion" src={icons[findMaxEmotion(emotion as any)]} />
+  emotions.map((emotion, index) => (
+    <img
+      key={`emotion-${index}`}
+      className="emotion"
+      src={icons[findMaxEmotion(emotion as any)]}
+    />
   ));
 
 const findMaxEmotion = (emotion: Record<string, number>): string => {
