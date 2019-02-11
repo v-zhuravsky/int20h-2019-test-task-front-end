@@ -1,1 +1,1 @@
-export const endpoint = 'https://faces.vova-lantsov.com/api/images/';
+export const endpoint = process.env.REACT_APP_API_URL;
